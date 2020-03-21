@@ -48,7 +48,6 @@ sudo apt install -yqq mediainfo
 sudo apt install -yqq neofetch 
 sudo apt install -yqq pv 
 sudo apt install -yqq youtube-dl
-# sudo apt install -yqq avahi-autoipd gvfs colord libdvdcss2 libvisual-0.4-plugins gstreamer1.0-tools avahi-autoipd qt5-image-formats-plugins qtwayland5 qt5-qmltooling-plugins python3-pyxattr-dbg python-pyxattr-doc comgt wvdial wpagui libengine-pkcs11-openssl
 # Useful gui programs
 # sudo apt install -yqq firefox
 # sudo apt install -yqq libreoffice
