@@ -3,24 +3,29 @@ export VISUAL=vim
 export EDITOR="$VISUAL"
 
 # NVM and Javascript
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/manoj/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/manoj/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/manoj/anaconda3/etc/profile.d/conda.sh"
+alias actnode = activate_nodeenv(){
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+}
+
+alias actpy = activate_python(){
+    # >>> conda initialize >>>
+    # !! Contents within this block are managed by 'conda init' !!
+    __conda_setup="$("$HOME/anaconda3/bin/conda" 'shell.bash' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
     else
-        export PATH="/home/manoj/anaconda3/bin:$PATH"
+        if [ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ]; then
+            . "$HOME/anaconda3/etc/profile.d/conda.sh"
+        else
+            export PATH="$HOME/anaconda3/bin:$PATH"
+        fi
     fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
+    unset __conda_setup
+    # <<< conda initialize <<<
+}
 
 # Eternal bash history.
 # ---------------------
@@ -36,8 +41,6 @@ unset __conda_setup
 # http://superuser.com/questions/20900/bash-history-loss
 # PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
-alias tb="nc termbin.com 9999"
+# alias tb="nc termbin.com 9999"
 
 # source `dirname $0`/custom-alias.sh
-
-

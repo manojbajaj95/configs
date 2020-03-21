@@ -107,18 +107,16 @@ source $ZSH/oh-my-zsh.sh
 source ~/configs/alias.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-#[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
-#source ~/powerlevel10k/powerlevel10k.zsh-theme
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/configs/p10k.zsh
 
 # Bind up-down keys for cycling through history
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
-if [ -f /etc/bash.command-not-found ]; then
-    . /etc/bash.command-not-found
-fi
+
+# Funky feature
+# if [ -f /etc/bash.command-not-found ]; then
+#    . /etc/bash.command-not-found
+# fi
 
 # Enable vim mode
 bindkey -v

@@ -8,7 +8,7 @@ sudo apt -yqq upgrade
 sudo apt -yqq full-upgrade
 ## Install
 # Essentials
-sudo apt-get install -yqq wget curl git rename vim make httpie htop snapd tree sl apt-transport-https xclip apt-transport-https
+sudo apt-get install -yqq wget curl git rename vim make httpie htop snapd tree sl apt-transport-https xclip apt-transport-https htop
 sudo apt-get install -yqq libcurl4-openssl-dev libssl-dev
 # Dev tools
 sudo snap install code --classic
@@ -37,17 +37,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 [ ! -f /etc/bash.command-not-found ] && sudo wget -O /etc/bash.command-not-found https://raw.githubusercontent.com/hkbakke/bash-insulter/master/src/bash.command-not-found
 
 # Useful terminal stuff 
-sudo apt install -yqq cmatrix 
-sudo apt install -yqq cowsay 
-sudo apt install -yqq dcfldd 
-sudo apt install -yqq ffmpeg 
-sudo apt install -yqq fortune-mod 
-sudo apt install -yqq htop 
-sudo apt install -yqq icoutils 
-sudo apt install -yqq mediainfo 
-sudo apt install -yqq neofetch 
-sudo apt install -yqq pv 
-sudo apt install -yqq youtube-dl
+#sudo apt install -yqq cmatrix cowsay fortune-mod neofetch 
+
 # Useful gui programs
 # sudo apt install -yqq firefox
 # sudo apt install -yqq libreoffice
