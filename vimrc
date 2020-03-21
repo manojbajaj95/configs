@@ -138,7 +138,8 @@ set pastetoggle=<F10>
 
 set noswapfile
 
-"set background=dark
-set background=light
-colorscheme PaperColor
+set background=dark
+"set background=light"
+"colorscheme PaperColor"
+colorscheme delek
 "!ctags -R --c-kinds=+p --fields=+S . "

@@ -1,8 +1,12 @@
+# @Author: Manoj Bajaj
+# Updates your zshrc file
+# github.com/manojbajaj95
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/manoj/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -70,7 +74,7 @@ ZSH_THEME=powerlevel10k/powerlevel10k
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions bgnotify common-aliases history-substring-search)
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions common-aliases history-substring-search vundle web-search)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -112,3 +116,9 @@ source ~/configs/alias.sh
 # Bind up-down keys for cycling through history
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
+if [ -f /etc/bash.command-not-found ]; then
+    . /etc/bash.command-not-found
+fi
+
+# Enable vim mode
+bindkey -v

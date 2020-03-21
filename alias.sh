@@ -1,4 +1,3 @@
-
 # NVM and Javascript
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -33,4 +32,4 @@ unset __conda_setup
 # http://superuser.com/questions/20900/bash-history-loss
 # PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
-source `dirname $0`/custom-alias.sh
+# source `dirname $0`/custom-alias.sh
