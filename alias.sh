@@ -1,3 +1,7 @@
+# Set vim as default
+export VISUAL=vim
+export EDITOR="$VISUAL"
+
 # NVM and Javascript
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -32,4 +36,8 @@ unset __conda_setup
 # http://superuser.com/questions/20900/bash-history-loss
 # PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
+alias tb="nc termbin.com 9999"
+
 # source `dirname $0`/custom-alias.sh
+
+
