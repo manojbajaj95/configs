@@ -1,4 +1,3 @@
-
 set nocompatible              " be iMproved, required
 filetype off                  " required
 " set the runtime path to include Vundle and initialize
@@ -14,28 +13,35 @@ Plugin 'VundleVim/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
+" Plugin 'tpope/vim-fugitive'
 Plugin 'kien/ctrlp.vim'
-Plugin 'Raimondi/delimitMate'
+" Plugin 'Raimondi/delimitMate'
 Plugin 'Yggdroot/indentLine'
+" Plugin 'neoclide/coc.nvim' , {'branch': 'release'}
 Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'preservim/nerdcommenter'
 Plugin 'mkitt/tabline.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-airline/vim-airline'
 Plugin 'alvan/vim-indexer'
-Plugin 'vim-airline/vim-airline-themes'
+" Plugin 'vim-airline/vim-airline-themes'
 Plugin 'mhinz/vim-signify'
-Plugin 'jistr/vim-nerdtree-tabs'
+" Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'haya14busa/incsearch.vim'
-Plugin 'kristijanhusak/vim-hybrid-material'
-Plugin 'liuchengxu/space-vim-dark'
-Plugin 'MattesGroeger/vim-bookmarks'
-"Plugin 'vim-syntastic/syntastic'
-"Plugin 'Valloric/YouCompleteMe'
-Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'vim-scripts/OmniCppComplete'
-Plugin 'mbbill/code_complete'
-"Plugin 'dominikduda/vim_current_word'
+" Plugin 'kristijanhusak/vim-hybrid-material'
+" Plugin 'liuchengxu/space-vim-dark'
+" Plugin 'MattesGroeger/vim-bookmarks'
+" Plugin 'vim-syntastic/syntastic'
+" Plugin 'Valloric/YouCompleteMe'
+" Plugin 'NLKNguyen/papercolor-theme'
+" Plugin 'vim-scripts/OmniCppComplete'
+" Plugin 'mbbill/code_complete'
+" Plugin 'dominikduda/vim_current_word'
+Plugin 'morhetz/gruvbox'
 Plugin 'skywind3000/vim-terminal-help'
 
 
@@ -73,12 +79,55 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 
-let g:ycm_clangd_uses_ycmd_caching = 0
-let g:ycm_global_ycm_extra_conf = '/home/alok/fastproc/.ycm_extra_conf.py'
+" let g:ycm_clangd_uses_ycmd_caching = 0
+" let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 
 
+" Nerd Tree Settinngs
+nnoremap <C-n> :NERDTreeToggle<CR>
+vmap ++ <plug>NERDCommenterToggle
+nmap ++ <plug>NERDCommenterToggle
 
-nnoremap <C-n> :NERDTreeTabsToggle<CR>
+" open NERDTree automatically
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * NERDTree
+
+let g:NERDTreeGitStatusWithFlags = 1
+"let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+"let g:NERDTreeGitStatusNodeColorization = 1
+"let g:NERDTreeColorMapCustom = {
+    "\ "Staged"    : "#0ee375",  
+    "\ "Modified"  : "#d9bf91",  
+    "\ "Renamed"   : "#51C9FC",  
+    "\ "Untracked" : "#FCE77C",  
+    "\ "Unmerged"  : "#FC51E6",  
+    "\ "Dirty"     : "#FFBD61",  
+    "\ "Clean"     : "#87939A",   
+    "\ "Ignored"   : "#808080"   
+    "\ }                         
+
+
+let g:NERDTreeIgnore = ['^node_modules$']
+
+" sync open file with NERDTree
+" " Check if NERDTree is open or active
+function! IsNERDTreeOpen()        
+  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+endfunction
+
+" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
+" file, and we're not in vimdiff
+function! SyncTree()
+  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
+    NERDTreeFind
+    wincmd p
+  endif
+endfunction
+
+" Highlight currently open buffer in NERDTree
+" autocmd BufEnter * call SyncTree()
+
+
 set encoding=utf-8
 set background=dark
 set t_Co=256
@@ -124,7 +173,7 @@ nnoremap <F2> :call ToggleMouse()<CR>
 nnoremap <F8> :Tagbar<CR>
 nnoremap <F9> :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 
-let g:indentLine_fileTypeExclude = ["nerdtree"]
+" let g:indentLine_fileTypeExclude = ["nerdtree"]
 
 nnoremap S :w<CR>
 
@@ -133,6 +182,11 @@ map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
 
 set pastetoggle=<F10>
 
@@ -141,5 +195,5 @@ set noswapfile
 set background=dark
 "set background=light"
 "colorscheme PaperColor"
-colorscheme delek
-"!ctags -R --c-kinds=+p --fields=+S . "
+colorscheme gruvbox 
+"!ctags -R --c-kinds=+p --fields=+S . 
