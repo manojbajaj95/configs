@@ -1,5 +1,7 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
+
+
 " set the runtime path to include Vundle and initialize
 "
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -9,41 +11,32 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-
-" The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-" Plugin 'tpope/vim-fugitive'
-Plugin 'kien/ctrlp.vim'
-" Plugin 'Raimondi/delimitMate'
+
+" Themes
+Plugin 'morhetz/gruvbox'
+" Plugin 'vim-airline/vim-airline-themes'
+" Plugin 'NLKNguyen/papercolor-theme'
+" Plugin 'liuchengxu/space-vim-dark'
+
+Plugin 'vim-airline/vim-airline'
 Plugin 'Yggdroot/indentLine'
-" Plugin 'neoclide/coc.nvim' , {'branch': 'release'}
+
+" Utilites
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'preservim/nerdcommenter'
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'ryanoasis/vim-devicons'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'preservim/nerdcommenter'
-Plugin 'mkitt/tabline.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'vim-airline/vim-airline'
-Plugin 'alvan/vim-indexer'
-" Plugin 'vim-airline/vim-airline-themes'
-Plugin 'mhinz/vim-signify'
-" Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'haya14busa/incsearch.vim'
-" Plugin 'kristijanhusak/vim-hybrid-material'
-" Plugin 'liuchengxu/space-vim-dark'
-" Plugin 'MattesGroeger/vim-bookmarks'
-" Plugin 'vim-syntastic/syntastic'
-" Plugin 'Valloric/YouCompleteMe'
-" Plugin 'NLKNguyen/papercolor-theme'
-" Plugin 'vim-scripts/OmniCppComplete'
-" Plugin 'mbbill/code_complete'
-" Plugin 'dominikduda/vim_current_word'
-Plugin 'morhetz/gruvbox'
-Plugin 'skywind3000/vim-terminal-help'
+Plugin 'Raimondi/delimitMate'
+Plugin 'prettier/vim-prettier'
+" Git Plugins
+Plugin 'airblade/vim-gitgutter'
 
+" C++ Specific Plugins
+Plugin 'majutsushi/tagbar'
+Plugin 'alvan/vim-indexer'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -60,58 +53,46 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
+" Disable arrow keys
+" noremap <Up> <NOP>
+" noremap <Down> <NOP>
+" noremap <Left> <NOP>
+" noremap <Right> <NOP>
+
+" --------------------------------------------------
+" Look and Feel
+
 set encoding=utf-8
-nnoremap <silent> <C-l> :nohl<CR><C-l>
 set number relativenumber
-"noremap <Up> <NOP>
-"noremap <Down> <NOP>
-"noremap <Left> <NOP>
-"noremap <Right> <NOP>
-nnoremap <F5> :UndotreeToggle<cr>
-set completeopt-=preview
-set backspace=indent,eol,start
 set tabstop=4
-set softtabstop=4   " Sets the number of columns for a TAB
+set softtabstop=4
 set shiftwidth=4
 set expandtab
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+set cindent
+set smarttab
+colorscheme gruvbox
+set background=dark
 
+" --------------------------------------------------
+" Remaps
+nnoremap H gT
+nnoremap L gt
+nmap S :w<CR>
 
-" let g:ycm_clangd_uses_ycmd_caching = 0
-" let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+" --------------------------------------------------
+" Incsearch
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
 
-
-" Nerd Tree Settinngs
-nnoremap <C-n> :NERDTreeToggle<CR>
-vmap ++ <plug>NERDCommenterToggle
-nmap ++ <plug>NERDCommenterToggle
-
-" open NERDTree automatically
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * NERDTree
-
-let g:NERDTreeGitStatusWithFlags = 1
-"let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-"let g:NERDTreeGitStatusNodeColorization = 1
-"let g:NERDTreeColorMapCustom = {
-    "\ "Staged"    : "#0ee375",  
-    "\ "Modified"  : "#d9bf91",  
-    "\ "Renamed"   : "#51C9FC",  
-    "\ "Untracked" : "#FCE77C",  
-    "\ "Unmerged"  : "#FC51E6",  
-    "\ "Dirty"     : "#FFBD61",  
-    "\ "Clean"     : "#87939A",   
-    "\ "Ignored"   : "#808080"   
-    "\ }                         
-
-
-let g:NERDTreeIgnore = ['^node_modules$']
+" --------------------------------------------------
+" Nerd Tree Settings
+nmap <C-n> :NERDTreeToggle<CR>
+let g:NERDTreeIgnore = ['^node_modules$','^.git']
 
 " sync open file with NERDTree
-" " Check if NERDTree is open or active
-function! IsNERDTreeOpen()        
+" Check if NERDTree is open or active
+function! IsNERDTreeOpen()
   return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
 endfunction
 
@@ -127,73 +108,67 @@ endfunction
 " Highlight currently open buffer in NERDTree
 " autocmd BufEnter * call SyncTree()
 
+" --------------------------------------------------
+" Nerd tree git plugin
+"let g:NERDTreeGitStatusWithFlags = 1
+"let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+"let g:NERDTreeGitStatusNodeColorization = 1
+"let g:NERDTreeColorMapCustom = {
+    "\ "Staged"    : "#0ee375",
+    "\ "Modified"  : "#d9bf91",
+    "\ "Renamed"   : "#51C9FC",
+    "\ "Untracked" : "#FCE77C",
+    "\ "Unmerged"  : "#FC51E6",
+    "\ "Dirty"     : "#FFBD61",
+    "\ "Clean"     : "#87939A",
+    "\ "Ignored"   : "#808080"
+    "\ }
 
-set encoding=utf-8
-set background=dark
-set t_Co=256
-set mouse=
-" Ignore some folders and files for CtrlP indexing
-let g:ctrlp_custom_ignore = {
-            \ 'dir':  '\.git$\|\.yardoc\|public$|log\|tmp$',
-            \ 'file': '\.so$\|\.dat$|\.DS_Store$'
-            \ }
-nnoremap H gT
-nnoremap L gt
-" press comma to run the last macro
-:map , @@
-let g:indentLine_char = '|'
-let g:indentLine_leadingSpaceEnabled = 1
-let g:indentLine_leadingSpaceChar = '-'
+" --------------------------------------------------
+" Nerd Tree Commenter
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
 
-" opens complementary cpp or h file
-function OpenPairFile()
-    let g:f_name = expand('%:r')
-    if match(g:f_name, 'src')!=-1
-        let g:final_name = substitute(g:f_name, 'src','include','g').'.h'
-    else
-        let g:final_name = substitute(g:f_name, 'include','src','g').'.cpp'
-    endif
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
 
-    execute 'edit' g:final_name
-endfunction
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
 
-function! ToggleMouse()
-    " check if mouse is enabled
-    if &mouse == 'a'
-        " disable mouse
-        set mouse=
-    else
-        " enable mouse everywhere
-        set mouse=a
-    endif
-endfunc
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
 
-autocmd BufNewFile,BufRead *.cpp,*.h nnoremap <buffer> <F7> :call OpenPairFile()<CR>
-nnoremap <F2> :call ToggleMouse()<CR>
-nnoremap <F8> :Tagbar<CR>
-nnoremap <F9> :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
+" Add your own custom formats or override the defaults
+" let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
 
-" let g:indentLine_fileTypeExclude = ["nerdtree"]
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
 
-nnoremap S :w<CR>
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
 
+" Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDToggleCheckAllLines = 1
 
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
+" --------------------------------------------------
 
-" don't give |ins-completion-menu| messages.
-set shortmess+=c
-
-" always show signcolumns
-set signcolumn=yes
-
-set pastetoggle=<F10>
-
-set noswapfile
-
-set background=dark
-"set background=light"
-"colorscheme PaperColor"
-colorscheme gruvbox 
-"!ctags -R --c-kinds=+p --fields=+S . 
+" Vim Tagbar
+nmap <F8> :TagbarToggle<CR>
+" --------------------------------------------------
+"Vim Indexer
+let g:indexer_root_markers = ['.git']
+let g:indexer_user_modules = ['log', 'tag']
+let g:indexer_logs_maxsize = 100
+let g:indexer_tags_watches = ["*.c", "*.h", "*.c++", "*.cpp", "*.hpp", "*.py"]
+let g:indexer_tags_command = "ctags"
+let g:indexer_tags_options = "-R --sort=yes --c++-kinds=+p+l --fields=+iaS --extra=+q --languages=c,c++,python"
+let g:indexer_tags_savedir = "~/.vim_indexer_tags/"
+let g:indexer_tags_handler_locate = ["locate"]
+let g:indexer_tags_handler_reload = ["reload", "-1"]
+let g:indexer_tags_handler_update = ["update"]
+" --------------------------------------------------
+"  Vim Prettier
+let g:prettier#autoformat = 1
+let g:prettier#autoformat_require_pragma = 0
+let g:prettier#autoformat_config_present = 1
+" --------------------------------------------------
