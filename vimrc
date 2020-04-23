@@ -31,12 +31,17 @@ Plugin 'ryanoasis/vim-devicons'
 Plugin 'haya14busa/incsearch.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'prettier/vim-prettier'
+" Plugin 'eaymotion/vim-easymotion'
+Plugin 'ctrlpvim/ctrlp.vim'
+
 " Git Plugins
 Plugin 'airblade/vim-gitgutter'
 
 " C++ Specific Plugins
 Plugin 'majutsushi/tagbar'
 Plugin 'alvan/vim-indexer'
+
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -53,11 +58,6 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-" Disable arrow keys
-" noremap <Up> <NOP>
-" noremap <Down> <NOP>
-" noremap <Left> <NOP>
-" noremap <Right> <NOP>
 
 " --------------------------------------------------
 " Look and Feel
@@ -75,9 +75,10 @@ set background=dark
 
 " --------------------------------------------------
 " Remaps
-nnoremap H gT
-nnoremap L gt
-nmap S :w<CR>
+source ~/.remaps.rc
+" --------------------------------------------------
+" Removes pipes | that act as seperators on splits
+set fillchars+=vert:\ 
 
 " --------------------------------------------------
 " Incsearch
@@ -87,7 +88,7 @@ map g/ <Plug>(incsearch-stay)
 
 " --------------------------------------------------
 " Nerd Tree Settings
-nmap <C-n> :NERDTreeToggle<CR>
+nmap <C-b> :NERDTreeToggle<CR>
 let g:NERDTreeIgnore = ['^node_modules$','^.git']
 
 " sync open file with NERDTree
@@ -172,3 +173,4 @@ let g:prettier#autoformat = 1
 let g:prettier#autoformat_require_pragma = 0
 let g:prettier#autoformat_config_present = 1
 " --------------------------------------------------
+" Easymotion
