@@ -1,7 +1,6 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-
 " set the runtime path to include Vundle and initialize
 "
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -31,6 +30,7 @@ Plugin 'ryanoasis/vim-devicons'
 Plugin 'haya14busa/incsearch.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'prettier/vim-prettier'
+
 " Plugin 'eaymotion/vim-easymotion'
 Plugin 'ctrlpvim/ctrlp.vim'
 
@@ -40,8 +40,7 @@ Plugin 'airblade/vim-gitgutter'
 " C++ Specific Plugins
 Plugin 'majutsushi/tagbar'
 Plugin 'alvan/vim-indexer'
-
-
+Plugin 'https://github.com/vim-syntastic/syntastic.git'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -72,7 +71,7 @@ set cindent
 set smarttab
 colorscheme gruvbox
 set background=dark
-
+"set mouse=a
 " --------------------------------------------------
 " Remaps
 source ~/.remaps.rc
@@ -93,28 +92,29 @@ let g:NERDTreeIgnore = ['^node_modules$','^.git']
 
 " sync open file with NERDTree
 " Check if NERDTree is open or active
-function! IsNERDTreeOpen()
-  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-endfunction
+" function! IsNERDTreeOpen()
+"  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+" endfunction
 
 " Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
 " file, and we're not in vimdiff
-function! SyncTree()
-  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-    NERDTreeFind
-    wincmd p
-  endif
-endfunction
+" function! SyncTree()
+"   if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
+"     NERDTreeFind
+"     wincmd p
+"   endif
+" endfunction
 
 " Highlight currently open buffer in NERDTree
 " autocmd BufEnter * call SyncTree()
 
+let g:NERDTreeMouseMode=3
 " --------------------------------------------------
 " Nerd tree git plugin
-"let g:NERDTreeGitStatusWithFlags = 1
-"let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-"let g:NERDTreeGitStatusNodeColorization = 1
-"let g:NERDTreeColorMapCustom = {
+" let g:NERDTreeGitStatusWithFlags = 1
+" let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+" let g:NERDTreeGitStatusNodeColorization = 1
+" let g:NERDTreeColorMapCustom = {
     "\ "Staged"    : "#0ee375",
     "\ "Modified"  : "#d9bf91",
     "\ "Renamed"   : "#51C9FC",
@@ -174,3 +174,17 @@ let g:prettier#autoformat_require_pragma = 0
 let g:prettier#autoformat_config_present = 1
 " --------------------------------------------------
 " Easymotion
+" --------------------------------------------------
+" Syntastic
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_c_remove_include_errors = 0
+let g:syntastic_c_no_include_search = 0
+let g:syntastic_cpp_remove_include_errors = 0
+let g:syntastic_cpp_checkers = ['g++']
+let g:syntastic_cpp_no_include_search = 0
+let g:syntastic_cpp_no_default_include_dirs = 1
+let g:syntastic_cpp_config_file = '.fastproc_custom_include_file_for_syntastic'
+let g:syntastic_cpp_compiler_options = ' -std=c++11x'

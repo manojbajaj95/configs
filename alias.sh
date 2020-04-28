@@ -1,5 +1,6 @@
 # Set vim as default
-export VISUAL=vim
+export vi=nvim
+export VISUAL=nvim
 export EDITOR="$VISUAL"
 
 # NVM and Javascript

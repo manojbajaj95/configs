@@ -33,3 +33,12 @@ map <Leader>tk <C-w>t<C-w>K
 " noremap <Left> <NOP>
 " noremap <Right> <NOP>
 " --------------------------------------------------
+" Copy Paste to system registers
+noremap <Leader>y "*y
+noremap <Leader>p "*p
+noremap <Leader>Y "+y
+noremap <Leader>P "+p
+" copy (write) highlighted text to .vimbuffer
+" vmap <C-c> y:new ~/.vimbuffer<CR>VGp:x<CR> \| :!cat ~/.vimbuffer \| clip.exe <CR><CR>
+" paste from buffer
+" map <C-v> :r ~/.vimbuffer<CR>"
